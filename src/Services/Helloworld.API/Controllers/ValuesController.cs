@@ -14,9 +14,11 @@ namespace Helloworld.API.Controllers
         [HttpGet]
         public ActionResult<IEnumerable<string>> Get()
         {
-            return new string[] { "value1", "value2" };
+            return new string[] { "Hello World from API",
+                  Environment.MachineName, DateTime.Now.ToLongTimeString() };
         }
 
+        // GET api/values/5
         // GET api/values/5
         [HttpGet("{id}")]
         public ActionResult<string> Get(int id)

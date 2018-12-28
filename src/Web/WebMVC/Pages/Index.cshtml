@@ -1,7 +1,7 @@
 ﻿@page
 @using Microsoft.Extensions.Configuration
 @inject IConfiguration Configuration
-
+@model WebMVC.Pages.IndexModel
 
 <!doctype html>
 <html lang="en">
@@ -23,8 +23,12 @@
         <p class="lead">This is a simple ASP.NET Core Web Application that returns the name, the one above, of the host running the App or wait is this running in a Container..?</p>
         <hr class="my-4" style="background-color: white">
         <p class="lead">Powered by Microsoft Azure Kubernetes Service and .NET Core</p>
-        <p><b>Joke of the Day</b>: @Configuration["Message"]</p>
+        <p><b>URI of the service</b>: @Configuration["HelloWorldApiUrl"]  </p>
         <p><b>Application Version</b>: @Configuration["Version"]</p>
+         <p class="lead">Api Result</p>
+        <p><b>API Message</b>: @Model.APIMessage  </p>
+        <p><b>API Host</b>: @Model.APIHostName </p>
+        <p><b>API Host responded at</b>: @Model.APIResponseTime </p>
         <a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a>
     </div>
 </div>
