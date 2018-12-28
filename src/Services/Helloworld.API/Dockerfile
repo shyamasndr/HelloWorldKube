@@ -2,11 +2,11 @@ FROM microsoft/aspnetcore-build AS build-env
 WORKDIR /app
 
 # copy csproj and restore as distinct layers
-COPY *.csproj ./
+COPY src/services/Helloworld.API/*.csproj ./
 RUN dotnet restore
 
 # copy everything else and build
-COPY . ./
+COPY src/services/Helloworld.API/ ./
 RUN dotnet publish -c Release -o output
 
 # build runtime image
