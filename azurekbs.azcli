@@ -1,0 +1,21 @@
+
+
+#Create resource group
+az group create  `
+ --name ShyamsAKSAppResource --location eastus
+
+#search an azure service principle
+az ad sp list --query "[?contains(displayName, 'shyam')]"
+az ad sp list --query "[].[displayName, appDisplayName]" -o table
+
+
+#create aks cluster 
+ az aks create `
+    --resource-group ShyamsAKSAppResource `
+    --name shyamsAKSCluster `
+    --node-count 1 `
+    --enable-addons monitoring `
+    --generate-ssh-keys
+
+az group delete  `
+ --name ShyamsAKSAppResource 

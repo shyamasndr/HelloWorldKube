@@ -1,0 +1,16 @@
+kubectl version
+kubectl get nodes
+
+kubectl run kubernetes-bootcamp1 --image=shyamslab/helloworldkubewebmvc:20181228.1 --port=80
+kubectl get deployments
+
+kubectl proxy
+
+curl http://localhost:8001/version
+
+export POD_NAME=$(kubectl get pods -o go-template --template '{{range .items}}{{.metadata.name}}{{"\n"}}{{end}}')
+echo Name of the Pod: $POD_NAME
+
+curl http://localhost:8001/api/v1/namespaces/default/pods/kubernetes-bootcamp1-864c5bd67f-ndqqp/proxy/
+
+kubectl exec -it kubernetes-bootcamp1 -- /bin/bas
