@@ -17,19 +17,19 @@ spec:
         track: stable
     spec:
       containers:
-        - name: helloworldkubeapi
-          image: "shyamslab/helloworldkubeapi:20181228.6"
-          env:
-          - name: ASPNETCORE_URLS
-            value: "http://localhost:5001"
-          ports:
-            - name: http
-              containerPort: 5001       
-        - name: helloworldkubewebmvc
-          image: "image=shyamslab/helloworldkubewebmvc:20181228.1"
-          env:
-          - name: HelloWorldApiUrl
-            value: "http://localhost:5001"
-          ports:
-            - name: http
-              containerPort: 80
+      - name: helloworldkubeapi
+        image: "shyamslab/helloworldkubeapi:20181228.6"
+        env:
+        - name: ASPNETCORE_URLS
+          value: "http://localhost:5001"
+        ports:
+          - name: http
+            containerPort: 5001       
+      - name: helloworldkubewebmvc
+        image: "image=shyamslab/helloworldkubewebmvc:20181228.1"
+        env:
+        - name: HelloWorldApiUrl
+          value: "http://localhost:5001"
+        ports:
+          - name: http
+            containerPort: 80
