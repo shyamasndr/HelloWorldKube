@@ -27,6 +27,7 @@ spec:
               containerPort: 5001       
         - name: helloworldkubewebmvc
           image: "image=shyamslab/helloworldkubewebmvc:20181228.1"
+          env:
           - name: HelloWorldApiUrl
             value: "http://localhost:5001"
           ports:
