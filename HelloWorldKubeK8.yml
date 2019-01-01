@@ -19,11 +19,15 @@ spec:
       containers:
         - name: helloworldkubeapi
           image: "shyamslab/helloworldkubeapi:20181228.6"
+          env:
+          - name: ASPNETCORE_URLS
+            value: "http://*.5000"
           ports:
             - name: http
-              containerPort: 80       
+              containerPort: 5000       
         - name: helloworldkubewebmvc
           image: "image=shyamslab/helloworldkubewebmvc:20181228.1"
+          
           ports:
             - name: http
               containerPort: 80
