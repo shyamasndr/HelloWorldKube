@@ -21,13 +21,14 @@ spec:
           image: "shyamslab/helloworldkubeapi:20181228.6"
           env:
           - name: ASPNETCORE_URLS
-            value: "http://*.5000"
+            value: "http://localhost:5001"
           ports:
             - name: http
-              containerPort: 5000       
+              containerPort: 5001       
         - name: helloworldkubewebmvc
           image: "image=shyamslab/helloworldkubewebmvc:20181228.1"
-          
+          - name: HelloWorldApiUrl
+            value: "http://localhost:5001"
           ports:
             - name: http
               containerPort: 80
