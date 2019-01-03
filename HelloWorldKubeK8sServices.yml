@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: helloworldkubeapideployment
+spec:
+  selector:
+    matchLabels:
+      app: helloworldkubeapi
+      tier: api
+      track: stable
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: helloworldkubeapi
+        tier: api
+        track: stable
+    spec:
+      containers:
+      - name: helloworldkubeapi
+        image: "shyamslab/helloworldkubeapi:20181228.6"     
+        ports:
+          - name: http
+            containerPort: 80
+ ---
+kind: Service
+apiVersion: v1
+metadata:
+  name: helloworldkubeapiservice
+spec:
+  selector:
+    app: helloworldkubeapi
+    tier: api
+    track: stable
+  ports:
+  - protocol: TCP
+    port: 80
+    targetPort: http
+            
