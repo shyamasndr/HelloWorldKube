@@ -18,9 +18,9 @@ spec:
     spec:
       containers:
       - name: helloworldkubeapi
-        image: "shyamslab/helloworldkubeapi:20181228.6"     
+        image: "shyamslab/helloworldkubeapi:20181228.6"
         ports:
           - name: http
-            containerPort: 80
+            containerPort: 5001       
 
             
