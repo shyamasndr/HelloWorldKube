@@ -22,18 +22,5 @@ spec:
         ports:
           - name: http
             containerPort: 80
- ---
-kind: Service
-apiVersion: v1
-metadata:
-  name: helloworldkubeapiservice
-spec:
-  selector:
-    app: helloworldkubeapi
-    tier: api
-    track: stable
-  ports:
-  - protocol: TCP
-    port: 80
-    targetPort: http
+
             
