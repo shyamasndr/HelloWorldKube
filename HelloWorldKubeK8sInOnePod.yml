@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: helloworldkubeapi
+spec:
+  selector:
+    matchLabels:
+      app: helloworldkubeapi
+      tier: api
+      track: stable
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: helloworldkubeapi
+        tier: api
+        track: stable
+    spec:
+      containers:
+      - name: helloworldkubeapi
+        image: "shyamslab/helloworldkubeapi:20181228.6"
+        env:
+        - name: ASPNETCORE_URLS
+          value: "http://localhost:5001"
+        ports:
+          - name: http
+            containerPort: 5001       
+      - name: helloworldkubewebmvc
+        image: "shyamslab/helloworldkubewebmvc:20181228.1"
+        env:
+        - name: HelloWorldApiUrl
+          value: "http://localhost:5001"
+        ports:
+          - name: http
+            containerPort: 80
