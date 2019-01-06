@@ -72,7 +72,7 @@ spec:
         image: "shyamslab/helloworldkubewebmvc:20181228.1"
         env:
         - name: HelloWorldApiUrl
-          value: "http://helloworldkubeapiservice"
+          value: "http://helloworldkubeapiservice:30080"
         ports:
           - name: http
             containerPort: 80
