@@ -29,8 +29,7 @@ namespace Helloworld.API
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
             services.AddDbContext<HelloWorldKubeDBContext>(options =>
-                options.UseSqlServer(
-                    Configuration.GetConnectionString("HelloWorldKubeDBContext")));
+                options.UseSqlServer(Configuration.GetConnectionString("HelloWorldKubeDBContext")));
 
         }
 
