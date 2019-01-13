@@ -11,5 +11,8 @@
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.App" />    
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="../../BuildingBlocks/WebHostCustomization/WebHost.Customization/WebHost.Customization.csproj" />    
+  </ItemGroup>
 
 </Project>

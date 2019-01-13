@@ -5,6 +5,10 @@ namespace Helloworld.API.Data
 {
     public class HelloWorldKubeDBContext:DbContext
     {
+        public HelloWorldKubeDBContext(DbContextOptions<HelloWorldKubeDBContext> options):base(options)
+        {
+            
+        }
         public DbSet<InvokeLog> InvokeLogs { get; set; }
     }
 
