@@ -31,15 +31,15 @@ namespace Helloworld.API.Controllers
             {
                 ServerHostName = Environment.MachineName,
                 InvokeTime = DateTime.UtcNow,
-                RequestorHostName = $"{ requestorIP} ( { ResolveRequestorHost() })"
+                RequestorHostName = $"{ requestorIP} ( { ResolveRequestorHost(requestorIP) })"
             });
-            _dBContext.SaveChangesAsync();
-            string ResolveRequestorHost()
+            _dBContext.SaveChanges();
+            string ResolveRequestorHost(string ipAddress)
             {
                 string hostName = string.Empty;
                 try
                 {
-
+                    hostName=Dns.GetHostEntry(ipAddress)?.HostName;
                 }
                 catch (Exception ex)
                 {
