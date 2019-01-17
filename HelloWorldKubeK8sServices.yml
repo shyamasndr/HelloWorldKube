@@ -76,3 +76,51 @@ spec:
         ports:
           - name: http
             containerPort: 80
+---
+apiVersion: apps/v1 
+kind: Deployment
+metadata:
+  name: helloworldkube-mssql-deployment
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: mssql
+        tier: apistorage
+        track: stable
+    spec:
+      terminationGracePeriodSeconds: 10
+      containers:
+      - name: mssql
+        image: dbik8registry.azurecr.io/dbi_linux_sql2017:CU4
+        ports:
+        - containerPort: 1433
+        env:
+        - name: ACCEPT_EULA
+          value: "Y"
+        - name: MSSQL_SA_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: mssql
+              key: SA_PASSWORD 
+        volumeMounts:
+        - name: mssqldb
+          mountPath: /var/opt/mssql
+      volumes:
+      - name: mssqldb
+        persistentVolumeClaim:
+          claimName: mssql-data
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: mssql-deployment
+spec:
+  selector:
+    app: mssql
+  ports:
+    - protocol: TCP
+      port: 1433
+      targetPort: 1433
+  type: LoadBalancer
