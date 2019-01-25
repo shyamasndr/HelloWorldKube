@@ -1,3 +1,5 @@
+# 
+
 apiVersion: v1
 kind: Service
 metadata:
@@ -31,10 +33,18 @@ spec:
     spec:
       containers:
       - name: helloworldkubeapi
-        image: "shyamslab/helloworldkubeapi:20181228.6"
+        image: "shyamslab/helloworldkubeapi:20190115.3"
+        env:
+        - name: DATABASEPASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: mssql
+              key: SA_PASSWORD 
+        - name: ConnectionStrings_HelloWorldKubeDBContext
+          value: "Server= mssql-deployment;Database=HelloWorldKube;UserId=sa;Password=$DATABASEPASSWORD; MultipleActiveResultSets=true"
         ports:
-          - name: http
-            containerPort: 80
+         - name: http
+           containerPort: 80
 ---
 apiVersion: v1
 kind: Service
@@ -69,7 +79,7 @@ spec:
     spec:
       containers:
       - name: helloworldkubewebmvc
-        image: "shyamslab/helloworldkubewebmvc:20181228.1"
+        image: "shyamslab/helloworldkubewebmvc:20190116.2"
         env:
         - name: HelloWorldApiUrl
           value: "http://helloworldkubeapiservice"
@@ -82,6 +92,11 @@ kind: Deployment
 metadata:
   name: helloworldkube-mssql-deployment
 spec:
+  selector:
+    matchLabels:
+      app: mssql
+      tier: apistorage
+      track: stable
   replicas: 1
   template:
     metadata:
@@ -93,7 +108,7 @@ spec:
       terminationGracePeriodSeconds: 10
       containers:
       - name: mssql
-        image: dbik8registry.azurecr.io/dbi_linux_sql2017:CU4
+        image:  mcr.microsoft.com/mssql/server
         ports:
         - containerPort: 1433
         env:
@@ -109,8 +124,11 @@ spec:
           mountPath: /var/opt/mssql
       volumes:
       - name: mssqldb
-        persistentVolumeClaim:
-          claimName: mssql-data
+        hostPath:
+          # directory location on host
+          path: /data
+          # this field is optional
+          type: DirectoryOrCreate
 ---
 apiVersion: v1
 kind: Service
