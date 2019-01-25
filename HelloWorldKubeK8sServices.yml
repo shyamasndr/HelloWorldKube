@@ -1,5 +1,4 @@
-# 
-
+# kubectl create secret generic mssql --from-literal=SA_PASSWORD="mysqlpassword@linux"
 apiVersion: v1
 kind: Service
 metadata:
@@ -40,8 +39,8 @@ spec:
             secretKeyRef:
               name: mssql
               key: SA_PASSWORD 
-        - name: ConnectionStrings_HelloWorldKubeDBContext
-          value: "Server= mssql-deployment;Database=HelloWorldKube;UserId=sa;Password=$DATABASEPASSWORD; MultipleActiveResultSets=true"
+        - name: ConnectionStrings__HelloWorldKubeDBContext
+          value: Server= mssql-deployment;Database=HelloWorldKube;User ID=sa;Password=$(DATABASEPASSWORD); MultipleActiveResultSets=true
         ports:
          - name: http
            containerPort: 80
